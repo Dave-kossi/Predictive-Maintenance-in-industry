@@ -32,7 +32,7 @@ Grâce à l'estimateur de **Kaplan-Meier**, nous visualisons la probabilité de 
 
 ### 3. Matrice de Risque et Planning
 Une visualisation scatter plot croisant le nombre d'erreurs et le RLU permet de cibler les machines à remplacer prioritairement.
-> **[RLU.png]**
+> **[RLU.png](RLU.png)**
 
 ---
 
