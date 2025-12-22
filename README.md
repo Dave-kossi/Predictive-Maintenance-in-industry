@@ -28,11 +28,11 @@ Le tableau de bord affiche immédiatement le nombre de machines en état critiqu
 
 ### 2. Analyse de Survie & Fiabilité
 Grâce à l'estimateur de **Kaplan-Meier**, nous visualisons la probabilité de survie du parc machine au cours du temps.
-> **[📷 INSERER CAPTURE : Courbes de survie Kaplan-Meier par modèle](Kaplan_models.png)**
+> **[Courbes de survie Kaplan-Meier par modèle de machines](Kaplan_models.png)**
 
 ### 3. Matrice de Risque et Planning
 Une visualisation scatter plot croisant le nombre d'erreurs et le RLU permet de cibler les machines à remplacer prioritairement.
-> **[RLU.png](RLU.png)**
+> **[La Remaining Useful Life des machines](RLU.png)**
 
 ---
 
