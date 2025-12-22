@@ -24,7 +24,7 @@ Dans l'industrie, une panne non planifiée peut coûter jusqu'à **50 000 €** 
 
 ### 1. Indicateurs de Performance (KPI)
 Le tableau de bord affiche immédiatement le nombre de machines en état critique et l'économie potentielle réalisable sur l'année.
-> **[📷 INSERER CAPTURE : Barre des KPI (Machines Critiques, ROI, Disponibilité)]**
+> **[Barre des KPI (Machines Critiques, ROI, Disponibilité)](Dashboard.png)**
 
 ### 2. Analyse de Survie & Fiabilité
 Grâce à l'estimateur de **Kaplan-Meier**, nous visualisons la probabilité de survie du parc machine au cours du temps.
