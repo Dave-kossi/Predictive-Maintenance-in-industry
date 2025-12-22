@@ -1,16 +1,16 @@
-# 🏭 Maintenance Prédictive Industrielle — RLU & ROI
+# Maintenance Prédictive Industrielle — RLU & ROI
 
 > **Statut du projet :** 🚧 En cours de développement  
 > **Objectif principal :** Passer d’une maintenance curative à une **maintenance prédictive orientée ROI**, en exploitant les données industrielles et l’IA.
 
 ---
 
-## 📌 Contexte Industriel
+## Contexte Industriel
 
 Dans l’industrie, une panne non planifiée peut coûter jusqu’à **50 000 €** par incident  
 (perte de production, interventions d’urgence, pénalités contractuelles).
 
-👉 La **maintenance prédictive** permet d’anticiper ces pannes en estimant la  
+ La **maintenance prédictive** permet d’anticiper ces pannes en estimant la  
 **RLU (Remaining Useful Life)** des équipements et en **optimisant le planning de maintenance**.
 
 Ce projet propose un **tableau de bord décisionnel interactif** combinant :
@@ -20,17 +20,17 @@ Ce projet propose un **tableau de bord décisionnel interactif** combinant :
 
 ---
 
-## 🎯 Objectifs du Projet
+##  Objectifs du Projet
 
-- 🔧 **Réduire les coûts de maintenance** liés aux pannes imprévues  
-- 📉 **Anticiper les défaillances** via la prédiction du RLU  
-- 🧠 **Aider à la décision** grâce à un *Health Score* interprétable (0–100)  
-- 📅 **Optimiser le planning de maintenance** selon la criticité réelle  
-- 💰 **Mesurer l’impact financier (ROI)** de la maintenance préventive  
+- **Réduire les coûts de maintenance** liés aux pannes imprévues  
+- **Anticiper les défaillances** via la prédiction du RLU  
+- **Aider à la décision** grâce à un *Health Score* interprétable (0–100)  
+- **Optimiser le planning de maintenance** selon la criticité réelle  
+- **Mesurer l’impact financier (ROI)** de la maintenance préventive  
 
 ---
 
-## 🧠 Concepts Clés
+## Concepts Clés
 
 ### 🔹 RLU — Remaining Useful Life
 Nombre de **jours restants avant défaillance probable** d’une machine.
@@ -49,7 +49,7 @@ ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts 
 
 ---
 
-## 📊 Données Utilisées
+##  Données Utilisées
 
 - **Source :** Microsoft Azure Predictive Maintenance Dataset (Kaggle)
 - **Types de données :**
@@ -60,9 +60,9 @@ ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts 
 
 ---
 
-## ⚙️ Méthodologie & Approche Data Science
+##  Méthodologie & Approche Data Science
 
-### 1️⃣ Feature Engineering Métier
+### 1️ Feature Engineering Métier
 - **Health Score (0–100)**  
   Combinaison pondérée des erreurs, maintenances et capteurs
 - **Agrégation télémétrique**  
@@ -71,14 +71,14 @@ ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts 
 
 ---
 
-### 2️⃣ Analyse de Survie (Statistique)
+### 2️ Analyse de Survie (Statistique)
 - Estimateur de **Kaplan-Meier**
 - Probabilité de survie à **30 / 60 / 90 jours**
 - Comparaison par **modèle de machine**
 
 ---
 
-### 3️⃣ Machine Learning
+### 3️ Machine Learning
 - **Random Forest Regressor**
 - Prédiction du **RLU en jours**
 - Métriques :
