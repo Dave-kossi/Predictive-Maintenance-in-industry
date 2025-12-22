@@ -139,7 +139,7 @@ Le tableau de bord permet de :
 
 ---
 
-## 🚀 Installation & Lancement
+##  Installation & Lancement
 
 ### Prérequis
 - Python 3.9+
