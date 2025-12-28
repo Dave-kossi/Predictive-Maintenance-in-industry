@@ -120,7 +120,6 @@ Croisement du **nombre d’erreurs** et du **RLU** pour prioriser les interventi
 - Recommandation d’actions :
   - 🔴 Intervention urgente
   - 🟠 Maintenance planifiée
-  - 🟡 Surveillance renforcée
   - 🟢 Maintenance standard
 - Génération d’un **planning Gantt**
 - Estimation :
