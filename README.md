@@ -153,6 +153,6 @@ Le tableau de bord permet de :
 ### Installation
 
 ```bash
-git clone https://github.com/ton-profil/predictive-maintenance-industry.git
+git clone https://github.com/Dave-kossi/predictive-maintenance-industry.git
 cd predictive-maintenance-industry
 pip install -r requirements.txt
