@@ -1,7 +1,7 @@
 #  Maintenance Prédictive Industrielle — RLU & ROI
 
 > **Objectif principal :** Transformer la maintenance curative en une stratégie **prédictive orientée ROI**, en exploitant les données industrielles et l’IA pour optimiser la disponibilité des actifs.
-
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://predictive-maintenance-in-industry-ci7wzatf9nlcghomctgbtx.streamlit.app/)
 ---
 
 ##  Problématique Business & Enjeux
