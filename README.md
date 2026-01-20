@@ -1,157 +1,106 @@
-# Maintenance Prédictive Industrielle — RLU & ROI
+#  Maintenance Prédictive Industrielle — RLU & ROI
 
-> **Statut du projet :** 🚧 En cours de développement  
-> **Objectif principal :** Passer d’une maintenance curative à une **maintenance prédictive orientée ROI**, en exploitant les données industrielles et l’IA.
-
----
-
-## Contexte Industriel
-
-Dans l’industrie, une panne non planifiée peut coûter jusqu’à **50 000 €** par incident  
-(perte de production, interventions d’urgence, pénalités contractuelles).
-
- La **maintenance prédictive** permet d’anticiper ces pannes en estimant la  
-**RLU (Remaining Useful Life)** des équipements et en **optimisant le planning de maintenance**.
-
-Ce projet propose un **tableau de bord décisionnel interactif** combinant :
-- analyse de survie
-- machine learning
-- indicateurs financiers (ROI)
+> **Objectif principal :** Transformer la maintenance curative en une stratégie **prédictive orientée ROI**, en exploitant les données industrielles et l’IA pour optimiser la disponibilité des actifs.
 
 ---
 
-##  Objectifs du Projet
+##  Problématique Business & Enjeux
 
-- **Réduire les coûts de maintenance** liés aux pannes imprévues  
-- **Anticiper les défaillances** via la prédiction du RLU  
-- **Aider à la décision** grâce à un *Health Score* interprétable (0–100)  
-- **Optimiser le planning de maintenance** selon la criticité réelle  
-- **Mesurer l’impact financier (ROI)** de la maintenance préventive  
+Dans le secteur industriel, une panne imprévue est un gouffre financier : **jusqu'à 50 000 € de perte par incident** (arrêts de ligne, logistique d'urgence, pénalités contractuelles).
+
+###  Le Défi : L'arbitrage du "Juste à Temps"
+Le succès d'une stratégie de maintenance repose sur une précision temporelle critique :
+* **Intervenir trop tôt :** Génère des coûts inutiles en remplaçant des pièces encore fonctionnelles (gaspillage de ressources).
+* **Intervenir trop tard :** Provoque la panne critique, entraînant des arrêts de production coûteux et des risques sécuritaires.
+
+###  Ma Solution
+J'ai développé un **outil d'aide à la décision** interactif qui transforme la télémétrie brute en indicateurs stratégiques :
+1. **Prédiction du RLU (Remaining Useful Life) :** Estimation de la durée de vie restante des équipements.
+2. **Calcul du ROI (Return On Investment) :** Quantification de la rentabilité financière générée par l'anticipation des pannes.
 
 ---
 
-## Concepts Clés
+## Objectifs du Projet
+
+* **Réduire les coûts opérationnels** liés aux arrêts non planifiés.
+* **Anticiper les défaillances** via des algorithmes de Machine Learning.
+* **Aider à la décision** grâce à un *Health Score* métier (0–100).
+* **Optimiser le planning** selon la criticité réelle des machines.
+* **Mesurer l’impact financier** pour justifier l'investissement technologique.
+
+---
+
+##  Concepts Clés
 
 ### 🔹 RLU — Remaining Useful Life
-Nombre de **jours restants avant défaillance probable** d’une machine.
-
-> Le RLU est l’indicateur central pour décider **quand intervenir**, ni trop tôt  
-> (coûts inutiles), ni trop tard (pannes critiques).
-
----
+Nombre de **jours restants avant défaillance probable** d’une machine. C'est l'indicateur central pour décider quand intervenir au moment optimal.
 
 ### 🔹 ROI — Return On Investment
-Mesure la **rentabilité économique** de la maintenance prédictive :
-
-\[
-ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts de maintenance}}
-\]
+Mesure la **rentabilité économique** de la solution :
+$$ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts de maintenance}}$$
 
 ---
 
-##  Données Utilisées
-
-- **Source :** Microsoft Azure Predictive Maintenance Dataset (Kaggle)
-- **Types de données :**
-  - Télémétrie (vibration, pression, rotation, voltage)
-  - Historique de maintenance
-  - Compteurs d’erreurs
-  - Informations machines (âge, modèle)
+## Données Utilisées
+* **Source :** Microsoft Azure Predictive Maintenance Dataset (Kaggle).
+* **Caractéristiques :** Télémétrie (vibration, pression, rotation, voltage), historique de maintenance, compteurs d’erreurs et spécificités machines (âge, modèle).
 
 ---
 
 ##  Méthodologie & Approche Data Science
 
-### 1️ Feature Engineering Métier
-- **Health Score (0–100)**  
-  Combinaison pondérée des erreurs, maintenances et capteurs
-- **Agrégation télémétrique**  
-  Moyenne, écart-type et amplitude des capteurs
-- **Sévérité de défaillance** (faible → critique)
+### 1️⃣ Feature Engineering Métier
+* **Health Score :** Indicateur de santé synthétique (0-100) basé sur la dérive des capteurs.
+* **Agrégations Temporelles :** Moyenne et écart-type glissants pour capter l'usure progressive.
+* **Sévérité :** Scoring de criticité pour prioriser les interventions.
+
+### 2️⃣ Analyse de Survie (Statistique)
+* Implémentation de l'estimateur de **Kaplan-Meier**.
+* Calcul des probabilités de survie à **30 / 60 / 90 jours** par modèle de machine.
+
+### 3️⃣ Machine Learning
+* **Modèle :** Random Forest Regressor (prédit le RLU en jours).
+* **Performance :** Évalué via la MAE (Erreur Moyenne Absolue) et le score $R^2$.
 
 ---
 
-### 2️ Analyse de Survie (Statistique)
-- Estimateur de **Kaplan-Meier**
-- Probabilité de survie à **30 / 60 / 90 jours**
-- Comparaison par **modèle de machine**
+## Aperçu et Interprétation du Dashboard
 
----
-
-### 3️ Machine Learning
-- **Random Forest Regressor**
-- Prédiction du **RLU en jours**
-- Métriques :
-  - Erreur Moyenne Absolue (MAE)
-  - Score R²
-- Détection et suppression des outliers
-
----
-
-## 🖥️ Aperçu du Tableau de Bord
-
-### 🔹 Indicateurs Clés (KPI)
-- Nombre de machines critiques
-- RLU moyen
-- Disponibilité à 30 jours
-- Économie potentielle & ROI
-
+### 🔹 Indicateurs Clés (KPI) & ROI
 ![KPI Dashboard](Dashboard.png)
-
----
+> **Analyse :** Ce panneau permet un pilotage financier direct. Le **ROI** permet de valider immédiatement la valeur générée par l'outil, tandis que la **Disponibilité à 30 jours** aide à la planification de la production.
 
 ### 🔹 Analyse de Survie
-Visualisation des courbes de survie globales et par modèle de machine.
-
 ![Kaplan-Meier par modèle](Kaplan_models.png)
-
----
+> **Analyse :** Ce graphique identifie les modèles de machines les plus fragiles statistiquement. Il permet d'adapter les contrats de maintenance selon la fiabilité réelle de chaque segment de parc.
 
 ### 🔹 Matrice de Risque & Priorisation
-Croisement du **nombre d’erreurs** et du **RLU** pour prioriser les interventions.
-
 ![RLU Matrix](RLU.png)
+> **Analyse :** Croisement critique du **Health Score** et du **RLU**. Les machines en zone rouge sont signalées pour une intervention immédiate, optimisant ainsi les déplacements des techniciens.
 
 ---
 
-## 📅 Planning de Maintenance Intelligent
-
-- Calcul d’un **score de priorité**
-- Recommandation d’actions :
-  - 🔴 Intervention urgente
-  - 🟠 Maintenance planifiée
-  - 🟢 Maintenance standard
-- Génération d’un **planning Gantt**
-- Estimation :
-  - durée d’intervention
-  - coût associé
+##  Planning de Maintenance Intelligent
+Le dashboard génère automatiquement :
+* Une recommandation d'action (🔴 Urgent, 🟠 Planifié, 🟢 Standard).
+* Un **planning Gantt** prévisionnel.
+* Une estimation des coûts et de la durée d'intervention pour chaque actif critique.
 
 ---
 
-## 💰 Impact Business & ROI
-
-Le tableau de bord permet de :
-- quantifier les **pannes évitées**
-- estimer les **économies annuelles**
-- mesurer le **ROI de la maintenance prédictive**
-- justifier les décisions auprès du management
-
----
-
-##  Installation & Lancement
+## ⚙️ Installation & Lancement
 
 ### Prérequis
-- Python 3.9+
-- pandas
-- numpy
-- streamlit
-- scikit-learn
-- plotly
-- lifelines
+Python 3.9+, pandas, numpy, streamlit, scikit-learn, plotly, lifelines.
 
-### Installation
-
+### Lancement
 ```bash
-git clone https://github.com/Dave-kossi/predictive-maintenance-industry.git
+# Cloner le dépôt
+git clone [https://github.com/Dave-kossi/predictive-maintenance-industry.git](https://github.com/Dave-kossi/predictive-maintenance-industry.git)
 cd predictive-maintenance-industry
+
+# Installer les bibliothèques
 pip install -r requirements.txt
+
+# Lancer l'application
+streamlit run app.py
