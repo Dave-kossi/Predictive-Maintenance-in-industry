@@ -1,106 +1,137 @@
-#  Maintenance Prédictive Industrielle — RLU & ROI
+# Maintenance Prédictive Industrielle — RLU & ROI
 
-> **Objectif principal :** Transformer la maintenance curative en une stratégie **prédictive orientée ROI**, en exploitant les données industrielles et l’IA pour optimiser la disponibilité des actifs.
+> **Objectif :** transformer la maintenance curative en stratégie **prédictive orientée ROI**, en exploitant la télémétrie industrielle et le Machine Learning pour optimiser la disponibilité des actifs.
+
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://predictive-maintenance-in-industry-ci7wzatf9nlcghomctgbtx.streamlit.app/)
----
-
-##  Problématique Business & Enjeux
-
-Dans le secteur industriel, une panne imprévue est un gouffre financier : **jusqu'à 50 000 € de perte par incident** (arrêts de ligne, logistique d'urgence, pénalités contractuelles).
-
-###  Le Défi : L'arbitrage du "Juste à Temps"
-Le succès d'une stratégie de maintenance repose sur une précision temporelle critique :
-* **Intervenir trop tôt :** Génère des coûts inutiles en remplaçant des pièces encore fonctionnelles (gaspillage de ressources).
-* **Intervenir trop tard :** Provoque la panne critique, entraînant des arrêts de production coûteux et des risques sécuritaires.
-
-###  Ma Solution
-J'ai développé un **outil d'aide à la décision** interactif qui transforme la télémétrie brute en indicateurs stratégiques :
-1. **Prédiction du RLU (Remaining Useful Life) :** Estimation de la durée de vie restante des équipements.
-2. **Calcul du ROI (Return On Investment) :** Quantification de la rentabilité financière générée par l'anticipation des pannes.
 
 ---
 
-## Objectifs du Projet
+## Problématique business
 
-* **Réduire les coûts opérationnels** liés aux arrêts non planifiés.
-* **Anticiper les défaillances** via des algorithmes de Machine Learning.
-* **Aider à la décision** grâce à un *Health Score* métier (0–100).
-* **Optimiser le planning** selon la criticité réelle des machines.
-* **Mesurer l’impact financier** pour justifier l'investissement technologique.
+Dans l'industrie, une panne imprévue coûte cher : arrêt de ligne, logistique d'urgence, pénalités contractuelles. Le défi est un arbitrage de timing :
 
----
+- **Intervenir trop tôt** → coûts inutiles sur des pièces encore fonctionnelles.
+- **Intervenir trop tard** → panne critique, arrêt de production, risque sécuritaire.
 
-##  Concepts Clés
+Ce dashboard transforme la télémétrie brute en deux indicateurs de décision :
 
-### 🔹 RLU — Remaining Useful Life
-Nombre de **jours restants avant défaillance probable** d’une machine. C'est l'indicateur central pour décider quand intervenir au moment optimal.
-
-### 🔹 ROI — Return On Investment
-Mesure la **rentabilité économique** de la solution :
-$$ROI = \frac{\text{Coûts évités} - \text{Coûts de maintenance}}{\text{Coûts de maintenance}}$$
+1. **RLU (Remaining Life Until failure)** — durée de vie restante estimée d'un équipement.
+2. **ROI** — rentabilité financière d'une intervention préventive anticipée.
 
 ---
 
-## Données Utilisées
-* **Source :** Microsoft Azure Predictive Maintenance Dataset (Kaggle).
-* **Caractéristiques :** Télémétrie (vibration, pression, rotation, voltage), historique de maintenance, compteurs d’erreurs et spécificités machines (âge, modèle).
+## Objectifs du projet
+
+- Réduire les coûts liés aux arrêts non planifiés.
+- Anticiper les défaillances par l'analyse de survie et le Machine Learning.
+- Fournir un *Health Score* métier (0–100) lisible par des non-data scientists.
+- Prioriser les interventions selon la criticité réelle du parc.
+- Chiffrer l'impact financier pour justifier l'investissement dans l'outil.
 
 ---
 
-##  Méthodologie & Approche Data Science
+## Concepts clés
 
-### 1️⃣ Feature Engineering Métier
-* **Health Score :** Indicateur de santé synthétique (0-100) basé sur la dérive des capteurs.
-* **Agrégations Temporelles :** Moyenne et écart-type glissants pour capter l'usure progressive.
-* **Sévérité :** Scoring de criticité pour prioriser les interventions.
+**RLU — Remaining Life Until failure**
+Nombre de jours restants avant défaillance probable d'une machine. Estimé par la médiane de survie de l'estimateur de Kaplan-Meier, par modèle de machine ; en cas d'échantillon trop petit pour un ajustement fiable (< 5 machines), l'outil retombe sur la médiane empirique du groupe et l'indique explicitement (voir *Fiabilité & transparence* ci-dessous).
 
-### 2️⃣ Analyse de Survie (Statistique)
-* Implémentation de l'estimateur de **Kaplan-Meier**.
-* Calcul des probabilités de survie à **30 / 60 / 90 jours** par modèle de machine.
+**ROI — Return On Investment**
 
-### 3️⃣ Machine Learning
-* **Modèle :** Random Forest Regressor (prédit le RLU en jours).
-* **Performance :** Évalué via la MAE (Erreur Moyenne Absolue) et le score $R^2$.
+```
+ROI = (Coûts de pannes évités − Coûts de maintenance préventive) / Coûts de maintenance préventive
+```
 
 ---
 
-## Aperçu et Interprétation du Dashboard
+## Données utilisées
 
-### 🔹 Indicateurs Clés (KPI) & ROI
+- **Source :** Microsoft Azure Predictive Maintenance Dataset (Kaggle).
+- **Contenu :** télémétrie (vibration, pression, rotation, voltage), historique de maintenance, compteurs d'erreurs, âge et modèle de chaque machine.
+
+---
+
+## Méthodologie
+
+### 1. Feature engineering métier
+- **Health Score** (0–100) à partir de la fréquence d'erreurs et de maintenances.
+- **Sévérité** : score de criticité (1 à 3) basé sur le volume d'erreurs, pour prioriser les interventions.
+- **Agrégats télémétriques** (moyenne, écart-type, amplitude) sur les 4 capteurs.
+
+### 2. Analyse de survie
+- Estimateur de **Kaplan-Meier**, ajusté par modèle de machine.
+- Probabilités de survie à **30 / 60 / 90 jours**.
+- Un panneau **"Transparence statistique"** indique, pour chaque modèle, si le RLU vient de Kaplan-Meier ou d'un fallback empirique — pour ne jamais présenter une estimation comme plus fiable qu'elle ne l'est.
+
+### 3. Machine Learning
+- **Modèle :** Random Forest Regressor, prédisant le RLU en jours à partir de l'âge, des compteurs d'erreurs/maintenance, de la sévérité et de la télémétrie agrégée.
+- **Évaluation :** MAE et R² calculés sur un **jeu de test isolé (25%)**, jamais sur les données d'entraînement, pour une mesure de performance honnête.
+- Un simulateur interactif permet de tester un scénario machine (âge, erreurs, maintenances) et d'obtenir une recommandation d'action.
+
+### 4. Paramétrage dynamique
+Les seuils critique/alerte et les coûts de panne/maintenance sont réglables depuis la barre latérale et **recalculent en direct** l'impact financier et le planning — aucune valeur métier n'est figée en dur dans le code.
+
+---
+
+## Aperçu du dashboard
+
+### Indicateurs clés (KPI) & ROI
 ![KPI Dashboard](Dashboard.png)
-> **Analyse :** Ce panneau permet un pilotage financier direct. Le **ROI** permet de valider immédiatement la valeur générée par l'outil, tandis que la **Disponibilité à 30 jours** aide à la planification de la production.
+> Pilotage financier direct : le ROI valide la valeur générée par l'outil, la disponibilité à 30 jours aide à la planification de production.
 
-### 🔹 Analyse de Survie
+### Analyse de survie
 ![Kaplan-Meier par modèle](Kaplan_models.png)
-> **Analyse :** Ce graphique identifie les modèles de machines les plus fragiles statistiquement. Il permet d'adapter les contrats de maintenance selon la fiabilité réelle de chaque segment de parc.
+> Identifie les modèles de machines statistiquement les plus fragiles, pour adapter les contrats de maintenance par segment de parc.
 
-### 🔹 Matrice de Risque & Priorisation
+### Matrice de risque & priorisation
 ![RLU Matrix](RLU.png)
-> **Analyse :** Croisement critique du **Health Score** et du **RLU**. Les machines en zone rouge sont signalées pour une intervention immédiate, optimisant ainsi les déplacements des techniciens.
+> Croisement Health Score × RLU : les machines en zone rouge sont signalées pour une intervention immédiate.
 
 ---
 
-##  Planning de Maintenance Intelligent
+## Planning de maintenance intelligent
+
 Le dashboard génère automatiquement :
-* Une recommandation d'action (🔴 Urgent, 🟠 Planifié, 🟢 Standard).
-* Un **planning Gantt** prévisionnel.
-* Une estimation des coûts et de la durée d'intervention pour chaque actif critique.
+- une recommandation d'action (🔴 Urgent · 🟠 Planifié · 🟡 Surveillance · 🟢 Standard) ;
+- un planning Gantt prévisionnel sur 30 jours ;
+- une estimation de durée et de coût par intervention, filtrable par modèle, niveau de risque et RLU.
 
 ---
 
-## ⚙️ Installation & Lancement
+## Fiabilité & transparence
+
+Points d'ingénierie volontairement mis en avant plutôt que masqués :
+- Les valeurs par défaut ne sont jamais un résultat silencieux : quand une estimation Kaplan-Meier échoue, l'application le signale au lieu d'afficher un chiffre invérifiable comme s'il était fiable.
+- Le modèle Random Forest et son scaler sont entraînés une fois (mis en cache) et évalués sur un jeu de test dédié ; les prédictions sont ensuite appliquées sans jamais ré-entraîner ni muter les données mises en cache.
+- Toutes les erreurs de chargement (fichier absent, colonnes manquantes) sont explicites côté interface, pas des exceptions silencieuses.
+
+---
+
+## Installation & lancement
 
 ### Prérequis
-Python 3.9+, pandas, numpy, streamlit, scikit-learn, plotly, lifelines.
+Python 3.9+, `streamlit`, `pandas`, `numpy`, `scikit-learn`, `plotly`, `lifelines`.
 
-### Lancement
+### Lancement local
 ```bash
-# Cloner le dépôt
-git clone [https://github.com/Dave-kossi/predictive-maintenance-industry.git](https://github.com/Dave-kossi/predictive-maintenance-industry.git)
+git clone https://github.com/Dave-kossi/predictive-maintenance-industry.git
 cd predictive-maintenance-industry
 
-# Installer les bibliothèques
 pip install -r requirements.txt
 
-# Lancer l'application
 streamlit run app.py
+```
+
+Le fichier de données `Predictive_Table.csv` doit être présent à la racine du projet (mêmes colonnes que le Microsoft Azure Predictive Maintenance Dataset : `machineID`, `model`, `age`, `time`, `event`, `error_count`, `maint_count`, `volt`, `rotate`, `pressure`, `vibration`).
+
+---
+
+## Stack technique
+
+`Python` · `Streamlit` · `pandas` / `numpy` · `scikit-learn` (Random Forest) · `lifelines` (Kaplan-Meier) · `Plotly`
+
+---
+
+## Auteur
+
+**Kossi Noumagno** — Master 2 Ingénierie Mathématique & Data Science, Université de Haute-Alsace.
+[LinkedIn](https://linkedin.com/in/kossi-noumagno) · [GitHub](https://github.com/Dave-kossi) · [Portfolio](https://dave-kossi.github.io/kossi-NOUMAGNO)
