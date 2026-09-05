@@ -237,7 +237,7 @@ def main():
             rlu_df, model, scaler = train_rlu_predictor(rlu_df)
     
     # ========== DASHBOARD PRINCIPAL ==========
-    st.title("🏭 Tableau de Bord Prédictif Maintenance")
+    st.title(" Tableau de Bord Prédictif Maintenance")
     st.markdown(f"**Analyse de {len(rlu_df)} machines** - Dernière mise à jour: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     
     # KPI Cards
@@ -276,7 +276,7 @@ def main():
         )
     
     # ========== VISUALISATIONS ==========
-    tab1, tab2, tab3, tab4 = st.tabs(["📈 Analyse de Survie", "🎯 Priorisation", "💰 Impact Financier", "📋 Planning"])
+    tab1, tab2, tab3, tab4 = st.tabs([" Analyse de Survie", " Priorisation", "💰 Impact Financier", "📋 Planning"])
     
     with tab1:
         col1, col2 = st.columns(2)
